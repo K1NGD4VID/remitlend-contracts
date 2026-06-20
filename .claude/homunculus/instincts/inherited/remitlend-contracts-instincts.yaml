@@ -1,0 +1,319 @@
+# Instincts generated from https://github.com/K1NGD4VID/remitlend-contracts
+# Generated: 2026-06-20T12:35:58.575Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: remitlend-contracts-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/K1NGD4VID/remitlend-contracts
+---
+
+# Remitlend Contracts Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: refactor
+
+## Evidence
+
+- 1 commits analyzed
+- Detected conventional commit pattern
+- Examples: refactor(remittance_nft): consolidate repayment floor validations and remove dead code
+
+---
+id: remitlend-contracts-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/K1NGD4VID/remitlend-contracts
+---
+
+# Remitlend Contracts Commit Length
+
+## Action
+
+Write moderate-length commit messages (~86 characters)
+
+## Evidence
+
+- Average commit message length: 86 chars
+- Based on 1 commits
+
+---
+id: remitlend-contracts-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/K1NGD4VID/remitlend-contracts
+---
+
+# Remitlend Contracts Naming Files
+
+## Action
+
+Use snake_case naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: snake_case
+
+---
+id: remitlend-contracts-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/K1NGD4VID/remitlend-contracts
+---
+
+# Remitlend Contracts Import Relative
+
+## Action
+
+Use relative imports for project files
+
+## Evidence
+
+- Import analysis shows relative import pattern
+- Example: import { x } from '../lib/x'
+
+---
+id: remitlend-contracts-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/K1NGD4VID/remitlend-contracts
+---
+
+# Remitlend Contracts Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: remitlend-contracts-test-naming
+trigger: "when creating a test file"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/K1NGD4VID/remitlend-contracts
+---
+
+# Remitlend Contracts Test Naming
+
+## Action
+
+Name test files using the pattern: *.test.ts
+
+## Evidence
+
+- File pattern: *.test.ts
+- Consistent across test files
+
+---
+id: remitlend-contracts-instinct-file-naming
+trigger: "When creating a new source file"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: K1NGD4VID/remitlend-contracts
+---
+
+# Remitlend Contracts Instinct File Naming
+
+## Action
+
+Name the file using snake_case
+
+## Evidence
+
+- Pattern in namingConventions.files: snake_case
+
+---
+id: remitlend-contracts-instinct-function-naming
+trigger: "When defining a new function"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: K1NGD4VID/remitlend-contracts
+---
+
+# Remitlend Contracts Instinct Function Naming
+
+## Action
+
+Name the function using camelCase
+
+## Evidence
+
+- Pattern in namingConventions.functions: camelCase
+
+---
+id: remitlend-contracts-instinct-class-naming
+trigger: "When defining a new class or struct"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: K1NGD4VID/remitlend-contracts
+---
+
+# Remitlend Contracts Instinct Class Naming
+
+## Action
+
+Name the class using PascalCase
+
+## Evidence
+
+- Pattern in namingConventions.classes: PascalCase
+
+---
+id: remitlend-contracts-instinct-constant-naming
+trigger: "When defining a constant"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: K1NGD4VID/remitlend-contracts
+---
+
+# Remitlend Contracts Instinct Constant Naming
+
+## Action
+
+Name the constant using SCREAMING_SNAKE_CASE
+
+## Evidence
+
+- Pattern in namingConventions.constants: SCREAMING_SNAKE_CASE
+
+---
+id: remitlend-contracts-instinct-import-style
+trigger: "When importing modules in Rust code"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: K1NGD4VID/remitlend-contracts
+---
+
+# Remitlend Contracts Instinct Import Style
+
+## Action
+
+Use relative imports
+
+## Evidence
+
+- Pattern in importStyle: relative
+
+---
+id: remitlend-contracts-instinct-export-style
+trigger: "When exporting items from a module"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: K1NGD4VID/remitlend-contracts
+---
+
+# Remitlend Contracts Instinct Export Style
+
+## Action
+
+Use named exports
+
+## Evidence
+
+- Pattern in exportStyle: named
+
+---
+id: remitlend-contracts-instinct-test-file-pattern
+trigger: "When adding a new test file"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: K1NGD4VID/remitlend-contracts
+---
+
+# Remitlend Contracts Instinct Test File Pattern
+
+## Action
+
+Name the test file with the pattern *.test.ts
+
+## Evidence
+
+- Pattern in testing.filePattern: *.test.ts
+
+---
+id: remitlend-contracts-instinct-test-type
+trigger: "When writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: K1NGD4VID/remitlend-contracts
+---
+
+# Remitlend Contracts Instinct Test Type
+
+## Action
+
+Write unit tests
+
+## Evidence
+
+- Pattern in testing.testTypes: unit
+
+---
+id: remitlend-contracts-instinct-git-commit-prefix
+trigger: "When making a refactor commit"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: K1NGD4VID/remitlend-contracts
+---
+
+# Remitlend Contracts Instinct Git Commit Prefix
+
+## Action
+
+Start the commit message with 'refactor' and a scope in parentheses, followed by a colon
+
+## Evidence
+
+- Pattern in commits.prefixes: refactor
+- Example: refactor(remittance_nft): consolidate repayment floor validations and remove dead code
+
+---
+id: remitlend-contracts-instinct-git-commit-format
+trigger: "When writing any commit message"
+confidence: 0.8
+domain: git
+source: repo-analysis
+source_repo: K1NGD4VID/remitlend-contracts
+---
+
+# Remitlend Contracts Instinct Git Commit Format
+
+## Action
+
+Follow the conventional commit format: <type>(<scope>): <description>
+
+## Evidence
+
+- Pattern in commits.type: conventional
+- Example: refactor(remittance_nft): consolidate repayment floor validations and remove dead code
+
