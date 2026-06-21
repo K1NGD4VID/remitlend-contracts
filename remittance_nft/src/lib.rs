@@ -605,7 +605,7 @@ impl RemittanceNFT {
 
         // Simple logic: 1 point per 100 units of repayment.
         let points_i128 = repayment_amount / 100;
-        
+
         // Note: The previous check `if points_i128 == 0 { return Ok(()); }` is mathematically
         // unreachable. Because the floor check guarantees that `repayment_amount >= effective_floor`
         // where `effective_floor` is at least 100, `points_i128` (calculated as `repayment_amount / 100`)

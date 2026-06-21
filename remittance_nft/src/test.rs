@@ -1901,4 +1901,3 @@ fn test_update_score_floor_above_effective() {
     client.update_score(&user, &151, &None);
     assert_eq!(client.get_score(&user), 501);
 }
-
