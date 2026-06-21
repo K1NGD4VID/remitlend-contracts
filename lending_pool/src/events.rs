@@ -24,10 +24,14 @@ pub fn emergency_withdraw(
     env.events().publish(topics, (amount, shares_burned));
 }
 
-#[allow(dead_code)]
 pub fn yield_distributed(env: &Env, token: Address, amount: i128) {
     let topics = (Symbol::new(env, "YieldDistributed"), token);
     env.events().publish(topics, amount);
+}
+
+pub fn loan_manager_updated(env: &Env, token: Address, loan_manager: Address) {
+    let topics = (Symbol::new(env, "LoanManagerUpdated"), token);
+    env.events().publish(topics, loan_manager);
 }
 
 pub fn deposit_cap_updated(

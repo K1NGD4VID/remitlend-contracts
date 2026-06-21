@@ -32,6 +32,9 @@ impl MockTarget {
             .get(&symbol_short!("admin"))
             .unwrap()
     }
+    pub fn bump_ttl(env: Env) {
+        env.storage().instance().extend_ttl(17280, 518400);
+    }
 }
 
 fn setup() -> (Env, GovernanceContractClient<'static>, Address, Address) {
@@ -657,4 +660,60 @@ fn propose_rejects_too_many_signers() {
         addrs.push_back(Address::generate(&env));
     }
     client.propose_admin_transfer(&Address::generate(&env), &addrs, &1, &MIN_TIMELOCK_SECONDS);
+}
+
+#[test]
+fn test_proposal_ttl_extension_keeps_proposal_active_and_finalizable() {
+    let (env, client, admin, target) = setup();
+    let target_client = MockTargetClient::new(&env, &target);
+    let proposed = Address::generate(&env);
+    let s1 = Address::generate(&env);
+    let s2 = Address::generate(&env);
+    let signers = Vec::from_slice(&env, &[s1.clone(), s2.clone()]);
+
+    // Step 1: Set initial ledger info
+    let mut ledger_info = LedgerInfo {
+        timestamp: 1000,
+        protocol_version: 22,
+        sequence_number: 100,
+        network_id: Default::default(),
+        base_reserve: 5_000_000,
+        min_temp_entry_ttl: 1_000_000,
+        min_persistent_entry_ttl: 1_000_000,
+        max_entry_ttl: 10_000_000,
+    };
+    env.ledger().set(ledger_info.clone());
+
+    // Step 2: Propose transfer (this sets KEY_PENDING and bumps TTL)
+    client.propose_admin_transfer(&proposed, &signers, &2, &MIN_TIMELOCK_SECONDS);
+
+    // Step 3: Approve 1 (this bumps TTL)
+    client.approve_transfer(&s1);
+
+    // Ensure the mock target is also bumped so it isn't archived during the sequence jump
+    target_client.bump_ttl();
+
+    // Step 4: Advance the ledger sequence number and timestamp significantly (e.g. 100,000 blocks and 200,000 seconds).
+    // This is within the 7-day proposal TTL, but tests that the instance storage remains active.
+    ledger_info.timestamp += 200_000;
+    ledger_info.sequence_number += 100_000;
+    env.ledger().set(ledger_info.clone());
+
+    // Step 5: Approve 2 (this bumps TTL and reads/updates proposal)
+    client.approve_transfer(&s2);
+
+    // Bump mock target again to keep it alive
+    target_client.bump_ttl();
+
+    // Step 6: Advance sequence number and timestamp beyond the timelock (24 hours).
+    // MIN_TIMELOCK_SECONDS is 86400. Let's advance by 90,000 seconds.
+    ledger_info.timestamp += 90_000;
+    ledger_info.sequence_number += 18_000;
+    env.ledger().set(ledger_info.clone());
+
+    // Step 7: Finalize should succeed because the proposal was kept alive and finalizable by TTL extensions.
+    client.finalize_admin_transfer(&admin);
+
+    assert_eq!(client.get_current_admin(), proposed);
+    assert!(!client.has_pending_transfer());
 }
